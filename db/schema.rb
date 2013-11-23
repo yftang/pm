@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131110154217) do
+ActiveRecord::Schema.define(version: 20131123140454) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "projects", force: true do |t|
+    t.string   "acc"
+    t.date     "start_date"
+    t.date     "dead_line"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "projects", ["acc"], name: "index_projects_on_acc", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -27,5 +38,16 @@ ActiveRecord::Schema.define(version: 20131110154217) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
+
+  create_table "workships", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "workships", ["project_id"], name: "index_workships_on_project_id", using: :btree
+  add_index "workships", ["user_id", "project_id"], name: "index_workships_on_user_id_and_project_id", unique: true, using: :btree
+  add_index "workships", ["user_id"], name: "index_workships_on_user_id", using: :btree
 
 end

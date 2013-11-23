@@ -12,6 +12,9 @@ class User < ActiveRecord::Base
 
   has_secure_password
   
+  has_many :workships
+  has_many :projects, through: :workships
+  
   def User.new_remember_token
     SecureRandom.urlsafe_base64
   end
