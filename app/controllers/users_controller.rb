@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @projects = @user.projects.paginate(page: params[:page] )
   end
 
   def new
@@ -44,13 +45,6 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :password,
                                    :password_confirmation)
-    end
-
-    def signed_in_user
-      unless signed_in?
-        store_location
-        redirect_to signin_url, notice: "Please sign in."
-      end
     end
 
     def correct_user

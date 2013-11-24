@@ -15,3 +15,8 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
+
+$(function() {
+  $("#project_start_date").datepicker();
+  $("#project_dead_line").datepicker();
+});

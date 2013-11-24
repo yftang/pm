@@ -1,0 +1,13 @@
+<%= form_for(@project) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <%= f.label :acc %>
+  <%= f.text_field :acc %>
+  
+  <%= f.label :start_date %>
+  <%= f.text_field :start_date %>
+  
+  <%= f.label :dead_line %>
+  <%= f.text_field :dead_line %>
+  
+  <%= f.submit "Create", class: "btn btn-large btn-primary" %>
+<% end %>

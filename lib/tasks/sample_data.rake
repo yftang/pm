@@ -14,5 +14,21 @@ namespace :db do
                    password: password,
                    password_confirmation: password)
     end
+    
+    users = User.all(limit: 6)
+    50.times do |n|
+      acc = "Project_#{n}"
+      description = Faker::Lorem.sentence(5)
+      start_date  = Time.now.to_date
+      dead_line   = n.days.from_now.to_date
+      users.each { |user| 
+        user.projects.create!(
+          acc: acc,
+          description: description,
+          start_date:  start_date,
+          dead_line:   dead_line
+        )
+      }
+    end
   end
 end

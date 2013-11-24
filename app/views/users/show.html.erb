@@ -1,9 +1,18 @@
 <% provide(:title, @user.name) %>
 <div class="row">
   <aside class="span4">
-    <h1>
+    <h3>
       <%= gravatar_for @user %>
       <%= @user.name %>
-    </h1>
+    </h3>
   </aside>
+  <div class="span8">
+    <% if @user.projects.any? %>
+      <h3>Projects (<%= @user.projects.count %>)</h3>
+      <ol class="projects">
+        <%= render @projects %>
+      </ol>
+      <%= will_paginate @projects %>
+    <% end %>
+  </div>
 </div>
