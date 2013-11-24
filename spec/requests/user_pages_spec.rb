@@ -87,7 +87,6 @@ describe "User Pages" do
     describe "projects" do
       it { should have_content(p1.acc) }
       it { should have_content(p2.acc) }
-      it { should have_content(user.projects.count) }
     end
   end
 

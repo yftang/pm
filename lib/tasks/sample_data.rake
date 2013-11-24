@@ -23,7 +23,7 @@ namespace :db do
       dead_line   = n.days.from_now.to_date
       users.each { |user| 
         user.projects.create!(
-          acc: acc,
+          acc: "#{acc}_#{user.id}",
           description: description,
           start_date:  start_date,
           dead_line:   dead_line

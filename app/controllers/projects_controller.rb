@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   before_action :signed_in_user, only: [:create, :destroy]
   
   def create
-    @project = current_user.projects.build(project_params)
+    @project = current_user.projects.create(project_params)
     if @project.save
       flash[:success] = "Project created!"
       redirect_to root_url
