@@ -9,6 +9,22 @@
         <%= render 'shared/project_form' %>
       </section>
     </aside>
+    <div class="span8">
+      <div id="calendar"></div>
+      <div id = "desc_dialog" class="dialog" style ="display:none;">
+        <div id = "event_desc"></div>
+        <br/>
+        <br/>
+        <div id = "event_actions">
+          <span id = "edit_event"></span>
+          <span id = "delete_event"></span>
+        </div>
+      </div>
+      <div id = "create_event_dialog" class="dialog" style ="display:none;">
+        <div id = "create_event">
+        </div>
+      </div>
+    </div>
   </div>
 <% else %>
   <div class="center hero-unit">
@@ -21,3 +37,71 @@
     <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
   </div>
 <% end %>
+
+<script>
+  $(document).ready(function(){
+    // page is now ready, initialize the calendar...
+    $('#new_event').click(function(event) {
+      event.preventDefault();
+      var url = $(this).attr('href');
+      $.ajax({
+        url: url,
+        beforeSend: function() {
+          $('#loading').show();
+        },
+        complete: function() {
+          $('#loading').hide();
+        },
+        success: function(data) {
+          $('#create_event').replaceWith(data['form']);
+          $('#create_event_dialog').dialog({
+            title: 'New Event',
+            modal: true,
+            width: 500,
+            close: function(event, ui) { $('#create_event_dialog').dialog('destroy') }
+          });
+        }
+      });
+    });
+
+    $('#calendar').fullCalendar({
+      editable: true,
+      header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'month'
+      },
+      defaultView: 'month',
+      height: 500,
+      slotMinutes: 15,
+      loading: function(bool){
+          if (bool)
+              $('#loading').show();
+          else
+              $('#loading').hide();
+      },
+      events: "/projects/get_projects",
+      timeFormat: 'h:mm t{ - h:mm t} ',
+      dragOpacity: "0.5",
+      eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc){
+//              if (confirm("Are you sure about this change?")) {
+              moveEvent(event, dayDelta);
+//              }
+//              else {
+//                  revertFunc();
+//              }
+      },
+      eventResize: function(event, dayDelta, minuteDelta, revertFunc){
+//              if (confirm("Are you sure about this change?")) {
+              resizeEvent(event, dayDelta);
+//              }
+//              else {
+//                  revertFunc();
+//              }
+      },
+      eventClick: function(event, jsEvent, view){
+          showEventDetails(event);
+      },
+    });
+  });
+</script>

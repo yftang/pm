@@ -1,0 +1,19 @@
+<%= form_for @project, :html => { :id => 'project_form' } do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <%= f.label :acc %>
+  <%= f.text_field :acc %>
+
+  <%= f.label :start_date %>
+  <%= f.date_field :start_date %>
+
+  <%= f.label :dead_line %>
+  <%= f.date_field :dead_line %>
+
+  <%= f.hidden_field :id, :value => @project.id %>
+  <%= f.hidden_field :commit_button, :value => '' %>
+
+  <%= f.submit "Update",
+      class: "btn btn-large btn-primary",
+      onclick:
+        "document.getElementById('project_commit_button').value = this.value" %>
+<% end %>

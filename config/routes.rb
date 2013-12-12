@@ -1,7 +1,15 @@
 Pm::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
-  resources :projects, only: [:show,:create, :destroy]
+  resources :projects do
+    collection do
+      get :get_projects
+      get :show
+      post :create
+      post :resize
+      post :move
+    end
+  end
   root  'static_pages#home'
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'
