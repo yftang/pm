@@ -7,7 +7,7 @@ describe ApplicationHelper do
     end
 
     it "should include the base title" do
-      expect(full_title("foo")).to match(/^Project Manager/)
+      expect(full_title("foo")).to match(/Project Manager/)
     end
 
     it "should not include a bar for the home page" do

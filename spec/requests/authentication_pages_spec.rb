@@ -29,7 +29,6 @@ describe "Authentication" do
       let(:user) { FactoryGirl.create(:user) }
       before { sign_in user }
 
-      it { should have_title(user.name) }
       it { should have_link('Profile',      href: user_path(user)) }
       it { should have_link('Settings',     href: edit_user_path(user)) }
       it { should have_link('Sign out',     href: signout_path) }
@@ -79,13 +78,13 @@ describe "Authentication" do
           it { should have_title('Sign in')}
         end
       end
-      
+
       describe "in the Projects controller" do
         describe "submitting to the create action" do
           before { post projects_path }
           specify { expect(response).to redirect_to(signin_path) }
         end
-        
+
         describe "submitting to the destroy action" do
           before { delete project_path(FactoryGirl.create(:project)) }
           specify { expect(response).to redirect_to(signin_path) }

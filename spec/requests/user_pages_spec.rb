@@ -77,13 +77,19 @@ describe "User Pages" do
 
   describe "profile page" do
     let(:user) { FactoryGirl.create(:user) }
-    let!(:p1) { user.projects.create(acc: 'Foo', start_date: Time.now.to_date, dead_line: 1.day.from_now.to_date) }
-    let!(:p2) { user.projects.create(acc: 'Bar', start_date: Time.now.to_date, dead_line: 2.day.from_now.to_date) }
+    let!(:p1) { user.projects.create(acc: 'Foo',
+                                     start_date: Time.now.to_date,
+                                     dead_line: 1.day.from_now.to_date,
+                                     status: 'running') }
+    let!(:p2) { user.projects.create(acc: 'Bar',
+                                     start_date: Time.now.to_date,
+                                     dead_line: 1.day.from_now.to_date,
+                                     status: 'running') }
     before { visit user_path(user) }
 
     it { should have_content(user.name) }
     it { should have_title(user.name) }
-    
+
     describe "projects" do
       it { should have_content(p1.acc) }
       it { should have_content(p2.acc) }

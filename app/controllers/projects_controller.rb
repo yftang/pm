@@ -76,7 +76,7 @@ class ProjectsController < ApplicationController
   private
 
     def project_params
-      params.require(:project).permit([:acc, :start_date, :dead_line])
+      params.require(:project).permit([:acc, :start_date, :dead_line, :status])
     end
 
     def correct_user

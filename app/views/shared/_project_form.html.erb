@@ -9,5 +9,11 @@
   <%= f.label :dead_line %>
   <%= f.text_field :dead_line %>
 
+  <%= f.label :status %>
+  <%= f.select :status, options_for_select([['Running', 'running'],
+                                            ['Complete', 'complete']]) %>
+
+  <br />
+
   <%= f.submit "Create", class: "btn btn-large btn-primary" %>
 <% end %>

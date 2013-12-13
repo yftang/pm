@@ -26,7 +26,8 @@ namespace :db do
           acc: "#{acc}_#{user.id}",
           description: description,
           start_date:  start_date,
-          dead_line:   dead_line
+          dead_line:   dead_line,
+          status: "running"
         )
       }
     end
