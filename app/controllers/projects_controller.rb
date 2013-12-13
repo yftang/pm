@@ -68,7 +68,7 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    @project = Project.find_by_id(params[:project][:id])
+    @project = Project.find_by_id(params[:id])
     @project.destroy
     render :nothing => true
   end

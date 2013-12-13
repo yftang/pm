@@ -17,61 +17,51 @@
 //= require_tree .
 
 function moveEvent(event, dayDelta){
-    jQuery.ajax({
-        data: 'id=' + event.id + '&title=' + event.title + '&day_delta=' + dayDelta + '&authenticity_token=' + '<%= form_authenticity_token >',
-        dataType: 'script',
-        type: 'post',
-        url: "/projects/move"
-    });
+  jQuery.ajax({
+    data: 'id=' + event.id + '&title=' + event.title + '&day_delta=' + dayDelta + '&authenticity_token=' + '<%= @auth_token %>',
+    dataType: 'script',
+    type: 'post',
+    url: "/projects/move"
+  });
 }
 
 function resizeEvent(event, dayDelta){
-    jQuery.ajax({
-        data: 'id=' + event.id + '&title=' + event.title + '&day_delta=' + dayDelta + '&authenticity_token=' + '<%= form_authenticity_token >',
-        dataType: 'script',
-        type: 'post',
-        url: "/projects/resize"
-    });
+  jQuery.ajax({
+    data: 'id=' + event.id + '&title=' + event.title + '&day_delta=' + dayDelta + '&authenticity_token=' + '<%= @auth_token %>',
+    dataType: 'script',
+    type: 'post',
+    url: "/projects/resize"
+  });
 }
 
 function showEventDetails(event){
-    $('#event_desc').html(event.description);
-    $('#edit_event').html("<a href = 'javascript:void(0);' onclick ='editEvent(" + event.id + ")'>Edit</a>");
-    if (event.recurring) {
-        title = event.title + "(Recurring)";
-        $('#delete_event').html("&nbsp; <a href = 'javascript:void(0);' onclick ='deleteEvent(" + event.id + ", " + false + ")'>Delete Only This Occurrence</a>");
-        $('#delete_event').append("&nbsp;&nbsp; <a href = 'javascript:void(0);' onclick ='deleteEvent(" + event.id + ", " + true + ")'>Delete All In Series</a>")
-        $('#delete_event').append("&nbsp;&nbsp; <a href = 'javascript:void(0);' onclick ='deleteEvent(" + event.id + ", \"future\")'>Delete All Future Events</a>")
+  $('#event_desc').html(event.description);
+  $('#edit_event').html("<a href = 'javascript:void(0);' onclick ='editEvent(" + event.id + ")'>Edit</a>");
+  title = event.title;
+  $('#delete_event').html("<a href = 'javascript:void(0);' onclick ='deleteEvent(" + event.id + ", " + false + ")'>Delete</a>");
+  $('#desc_dialog').dialog({
+    title: title,
+    modal: true,
+    width: 500,
+    close: function(event, ui){
+      $('#desc_dialog').dialog('destroy')
     }
-    else {
-        title = event.title;
-        $('#delete_event').html("<a href = 'javascript:void(0);' onclick ='deleteEvent(" + event.id + ", " + false + ")'>Delete</a>");
-    }
-    $('#desc_dialog').dialog({
-        title: title,
-        modal: true,
-        width: 500,
-        close: function(event, ui){
-            $('#desc_dialog').dialog('destroy')
-        }
-
-    });
-
+  });
 }
 
 
 function editEvent(event_id){
-    jQuery.ajax({
-      url: "/projects/" + event_id + "/edit",
-      success: function(data) {
-        $('#event_desc').html(data['form']);
-      }
-    });
+  jQuery.ajax({
+    url: "/projects/" + event_id + "/edit",
+    success: function(data) {
+      $('#event_desc').html(data['form']);
+    }
+  });
 }
 
 function deleteEvent(event_id, delete_all){
   jQuery.ajax({
-    data: 'authenticity_token=' + authenticity_token + '&delete_all=' + delete_all,
+    data: 'authenticity_token=' + '<%= @auth_token %>' + '&delete_all=' + delete_all,
     dataType: 'script',
     type: 'delete',
     url: "/projects/" + event_id,
