@@ -36,9 +36,10 @@ function resizeEvent(event, dayDelta){
 
 function showEventDetails(event){
   $('#event_desc').html(event.description);
-  $('#edit_event').html("<a href = 'javascript:void(0);' onclick ='editEvent(" + event.id + ")'>Edit</a>");
+  $('#edit_event').html("<a href='javascript:void(0);' onclick='editEvent("+event.id+")'>Edit</a>");
   title = event.title;
-  $('#delete_event').html("<a href = 'javascript:void(0);' onclick ='deleteEvent(" + event.id + ", " + false + ")'>Delete</a>");
+  $('#delete_event').html("<a href='javascript:void(0);' onclick='deleteEvent("+event.id+", "+false+")'>Delete</a>");
+  $('#show_event_detail').html("<div style='text-align:right'><a href='/projects/"+event.id+"'>Show detail</a></div>")
   $('#desc_dialog').dialog({
     title: title,
     modal: true,
