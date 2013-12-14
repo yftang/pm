@@ -11,7 +11,13 @@ class ProjectsController < ApplicationController
         :title       => project.acc,
         :description => project.description,
         :start       => project.start_date,
-        :end         => project.dead_line
+        :end         => project.dead_line,
+        :color       => case project.status
+                        when 'running'
+                          'red'
+                        when 'complete'
+                          'green'
+                        end
       }
     end
     render :text => projects.to_json
@@ -57,7 +63,7 @@ class ProjectsController < ApplicationController
 
   def edit
     @project = Project.find_by_id(params[:id])
-    render :json => { :form => render_to_string(:partial => 'edit_form') }
+    render :json => { :form => render_to_string(:partial => 'edit') }
   end
 
   def update

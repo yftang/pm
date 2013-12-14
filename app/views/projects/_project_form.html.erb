@@ -1,0 +1,15 @@
+<%= f.label :acc %>
+<%= f.text_field :acc %>
+
+<%= f.label :start_date %>
+<%= f.date_field :start_date %>
+
+<%= f.label :dead_line %>
+<%= f.date_field :dead_line %>
+
+<%= f.label :status %>
+<%= f.select :status, options_for_select([['Running', 'running'],
+                                          ['Complete', 'complete']]) %>
+
+<%= f.hidden_field :id, :value => @project.id %>
+<%= f.hidden_field :commit_button, :value => '' %>

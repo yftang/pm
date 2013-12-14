@@ -104,9 +104,6 @@ function showPeriodAndFrequency(value){
 
 $(document).ready(function(){
 
-  $("#project_start_date").datepicker();
-  $("#project_dead_line").datepicker();
-
   $('#create_event_dialog, #desc_dialog').on('submit', "#event_form", function(event) {
     var $spinner = $('.spinner');
     event.preventDefault();

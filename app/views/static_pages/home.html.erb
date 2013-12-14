@@ -6,7 +6,15 @@
         <%= render 'shared/user_info' %>
       </section>
       <section>
-        <%= render 'shared/project_form' %>
+        <%= form_for(@project) do |f| %>
+          <%= render 'shared/error_messages', object: f.object %>
+
+          <%= render 'projects/project_form', f: f %>
+
+          <br />
+
+          <%= f.submit "Create", class: "btn btn-large btn-primary" %>
+        <% end %>
       </section>
     </aside>
     <div class="span8">
