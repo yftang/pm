@@ -60,13 +60,15 @@ function editEvent(event_id){
 }
 
 function deleteEvent(event_id, delete_all){
-  jQuery.ajax({
-    data: 'authenticity_token=' + '<%= @auth_token %>' + '&delete_all=' + delete_all,
-    dataType: 'script',
-    type: 'delete',
-    url: "/projects/" + event_id,
-    success: refetch_events_and_close_dialog
-  });
+  if (confirm("Are you sure to delete this project permanently?")) {
+    jQuery.ajax({
+      data: 'authenticity_token=' + '<%= @auth_token %>' + '&delete_all=' + delete_all,
+      dataType: 'script',
+      type: 'delete',
+      url: "/projects/" + event_id,
+      success: refetch_events_and_close_dialog
+    });
+  }
 }
 
 function refetch_events_and_close_dialog() {
