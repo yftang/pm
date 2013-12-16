@@ -4,8 +4,14 @@
 <%= f.label :start_date %>
 <%= f.date_field :start_date %>
 
-<%= f.label :dead_line %>
-<%= f.date_field :dead_line %>
+<%= f.label :description %>
+<%= f.text_area :description%>
+
+<%= f.label :assigner %>
+<%= f.text_field :assigner %>
+
+<%= f.label :species %>
+<%= f.text_field :species %>
 
 <%= f.label :status %>
 <%= f.select :status, options_for_select([['Running', 'running'],

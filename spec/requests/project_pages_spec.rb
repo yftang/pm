@@ -24,7 +24,6 @@ describe "ProjectPages" do
       before do
         fill_in 'project_acc',        with: 'Project_9'
         fill_in 'project_start_date', with: Time.now.to_date
-        fill_in 'project_dead_line',  with: 1.day.from_now.to_date
         # choose 'running'
       end
 

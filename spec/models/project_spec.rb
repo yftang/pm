@@ -22,7 +22,7 @@ describe Project do
 
   describe "when acc is not present" do
     before { @project.acc = nil }
-    it { should_not be_valid }
+    it { should be_valid }
   end
 
   describe "with valie status" do

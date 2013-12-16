@@ -8,7 +8,7 @@ class ProjectsController < ApplicationController
     @projects.each do |project|
       projects << {
         :id          => project.id,
-        :title       => project.acc,
+        :title       => project_acc(project),
         :description => project.description,
         :start       => project.start_date,
         :end         => project.dead_line,
@@ -89,5 +89,9 @@ class ProjectsController < ApplicationController
     def correct_user
       project = Project.find(params[:id])
       redirect_to root_path unless project.users.include? current_user
+    end
+
+    def project_acc(project)
+      project.acc.empty? ? ':-)' : project.acc
     end
 end
