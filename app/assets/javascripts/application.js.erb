@@ -16,6 +16,21 @@
 //= require turbolinks
 //= require_tree .
 
+function showSearchResult() {
+  query_acc = $('#query').val();
+  jQuery.get("/projects/search_project",
+             { search_acc: query_acc },
+             function (data) {
+      $('#project_list').html('<a href="/projects/'+data.id+'">'+data.acc+'</a>');
+             }
+  );
+  $('#search_result').dialog({
+    title: 'Search result',
+    modal: true,
+    width: 500
+  });
+}
+
 function moveEvent(event, dayDelta){
   jQuery.ajax({
     data: 'id=' + event.id + '&title=' + event.title + '&day_delta=' + dayDelta + '&authenticity_token=' + '<%= @auth_token %>',

@@ -5,6 +5,7 @@ Pm::Application.routes.draw do
     collection do
       get :get_projects
       get :show
+      get :search_project
       post :create
       post :resize
       post :move

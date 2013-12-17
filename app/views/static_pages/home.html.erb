@@ -39,11 +39,12 @@
   <div class="center hero-unit">
     <h1>Welcome to the Project Manager</h1>
 
-    <h2>
-      This is the home page for the Project Manager application.
-    </h2>
+    <%= text_field_tag 'query', nil, placeholder: 'Enter project Acc. here', id: 'query' %>
+    <%= button_to_function "Search", "showSearchResult()", class: "btn btn-primary btn-large" %>
+  </div>
 
-    <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
+  <div id="search_result" style="display:none">
+    <div id="project_list"></div>
   </div>
 <% end %>
 

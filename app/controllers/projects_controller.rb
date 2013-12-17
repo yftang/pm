@@ -1,5 +1,7 @@
 class ProjectsController < ApplicationController
-  before_action :signed_in_user
+  before_action :signed_in_user, only: [:get_projects, :show, :create,
+                                        :move, :resize, :edit, :update,
+                                        :destroy]
   before_action :correct_user, only: [:show]
 
   def get_projects
@@ -21,6 +23,18 @@ class ProjectsController < ApplicationController
       }
     end
     render :text => projects.to_json
+  end
+
+  def search_project
+    search_acc = params[:search_acc].strip
+    search_result = Project.find_by_acc(search_acc)
+    project = {
+      id: search_result.id,
+      acc: search_result.acc,
+      start_date: search_result.start_date,
+      description: search_result.description,
+    }
+    render :json => project.to_json
   end
 
   def show
