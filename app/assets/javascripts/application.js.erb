@@ -21,13 +21,21 @@ function showSearchResult() {
   jQuery.get("/projects/search_project",
              { search_acc: query_acc },
              function (data) {
+    if(data == null) {
+      $('#project_list').html('Item not found!');
+    }else {
       $('#project_list').html('<a href="/projects/'+data.id+'">'+data.acc+'</a>');
+    }
              }
   );
   $('#search_result').dialog({
     title: 'Search result',
     modal: true,
-    width: 500
+    width: 500,
+    close: function() {
+      $('#project_list').html('');
+      $('#search_result').dialog('destroy');
+    }
   });
 }
 

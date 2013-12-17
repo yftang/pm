@@ -27,14 +27,19 @@ class ProjectsController < ApplicationController
 
   def search_project
     search_acc = params[:search_acc].strip
-    search_result = Project.find_by_acc(search_acc)
-    project = {
-      id: search_result.id,
-      acc: search_result.acc,
-      start_date: search_result.start_date,
-      description: search_result.description,
-    }
-    render :json => project.to_json
+    search_result = Project.first(
+        conditions: ["lower(acc) = ?", search_acc.downcase])
+    if search_result
+      project = {
+        id: search_result.id,
+        acc: search_result.acc,
+        start_date: search_result.start_date,
+        description: search_result.description,
+      }
+      render :json => project.to_json
+    else
+      render :json => nil
+    end
   end
 
   def show
@@ -97,7 +102,8 @@ class ProjectsController < ApplicationController
   private
 
     def project_params
-      params.require(:project).permit([:acc, :start_date, :dead_line, :status])
+      params.require(:project).permit(
+        [:acc, :start_date, :description, :assigner, :species, :status])
     end
 
     def correct_user

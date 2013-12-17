@@ -40,7 +40,7 @@
     <h1>Welcome to the Project Manager</h1>
 
     <%= text_field_tag 'query', nil, placeholder: 'Enter project Acc. here', id: 'query' %>
-    <%= button_to_function "Search", "showSearchResult()", class: "btn btn-primary btn-large" %>
+    <%= link_to "Search", "javascript:void(0);", onclick: "showSearchResult()", class: "btn btn-primary btn-large" %>
   </div>
 
   <div id="search_result" style="display:none">

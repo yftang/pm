@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  validates :acc, uniqueness: true
+  validates :acc, presence: true, uniqueness: { case_sensitive: false }
   validates :start_date, presence: true
   validates :status, presence: true,
                      inclusion: { in: %w(running complete),
