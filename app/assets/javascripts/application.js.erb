@@ -22,7 +22,7 @@ function showSearchResult() {
              { search_acc: query_acc },
              function (data) {
     if(data == null) {
-      $('#project_list').html('Item not found!');
+      $('#project_list').html('<p>Project not found, maybe being generated.</p>');
     }else {
       $('#project_list').html('<a href="/projects/'+data.id+'">'+data.acc+'</a>');
     }
