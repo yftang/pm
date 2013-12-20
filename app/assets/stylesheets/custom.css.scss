@@ -219,3 +219,45 @@ td.project_attr {
   width: 150px;
   font-weight: bold;
 }
+
+/* project progress */
+div#project_progress {
+  text-align: center;
+  div {
+    display: inline-block;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 1.1em;
+    width: 120px;
+    height: 20px;
+    line-height: 15px;
+    vertical-align: top;
+    padding: 50px 0 50px 0;
+    margin: 0px -5px 0px -5px;
+    text-align: center;
+  }
+}
+
+div#legends {
+  text-align: center;
+  div{
+    display: inline-block;
+    border-radius: 2px;
+    div.legend {
+      width: 10px;
+      height: 10px;
+      margin: 0 0 0 10px;
+    }
+  }
+}
+
+.done {
+  background-color: green;
+}
+.not-done {
+  background-color: lighten(red, 30%);
+  color: $gray;
+}
+.arrow {
+  padding-top: 50px;
+}

@@ -1,8 +1,7 @@
 class ProjectsController < ApplicationController
-  before_action :signed_in_user, only: [:get_projects, :show, :create,
-                                        :move, :resize, :edit, :update,
-                                        :destroy]
-  before_action :correct_user, only: [:show]
+  before_action :signed_in_user, only: [:get_projects, :create, :move,
+                                        :resize, :edit, :update, :destroy]
+  # before_action :correct_user,   only: [:show]
 
   def get_projects
     @projects = current_user.projects
@@ -10,7 +9,7 @@ class ProjectsController < ApplicationController
     @projects.each do |project|
       projects << {
         :id          => project.id,
-        :title       => project_acc(project),
+        :title       => project.acc,
         :description => project.description,
         :start       => project.start_date,
         :end         => project.dead_line,
@@ -31,9 +30,9 @@ class ProjectsController < ApplicationController
         conditions: ["lower(acc) = ?", search_acc.downcase])
     if search_result
       project = {
-        id: search_result.id,
-        acc: search_result.acc,
-        start_date: search_result.start_date,
+        id:          search_result.id,
+        acc:         search_result.acc,
+        start_date:  search_result.start_date,
         description: search_result.description,
       }
       render :json => project.to_json
@@ -43,9 +42,12 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @user = current_user
     @project = Project.find(params[:id])
-    @users = @project.users
+
+    if signed_in? and correct_user
+      @user = current_user
+      @users = @project.users
+    end
   end
 
   def create
@@ -109,9 +111,5 @@ class ProjectsController < ApplicationController
     def correct_user
       project = Project.find(params[:id])
       redirect_to root_path unless project.users.include? current_user
-    end
-
-    def project_acc(project)
-      project.acc.empty? ? ':-)' : project.acc
     end
 end

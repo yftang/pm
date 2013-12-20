@@ -27,7 +27,11 @@ namespace :db do
           description: description,
           start_date:  start_date,
           dead_line:   dead_line,
-          status: "running"
+          status: "running",
+          status_samples_received:    'not-done',
+          status_experiments_done:    'not-done',
+          status_bioinformatics_done: 'not-done',
+          status_report_finished:     'not-done'
         )
       }
     end

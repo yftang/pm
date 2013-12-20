@@ -1,33 +1,69 @@
 <% provide(:title, @project.acc) %>
-<div class="row">
-  <aside class="span4">
-    <h3>Users responsible for</h3>
-    <span>
-      <% for user in @users %>
-        <%= gravatar_for @user %>
-      <% end %>
-    </span>
-  </aside>
-  <div class="span8">
-    <h3>Project detail</h3>
+<% if signed_in? %>
+  <div class="row">
+    <aside class="span4">
+      <h3>Users responsible for</h3>
+      <span>
+        <% for user in @users %>
+          <%= gravatar_for @user %>
+        <% end %>
+      </span>
+    </aside>
+    <div class="span8">
+      <h3>Project detail</h3>
 
-    <table>
-      <tr>
-        <td class="project_attr"><strong>Acc: </strong></td>
-        <td><%= @project.acc %></td>
-      </tr>
-      <tr>
-        <td class="project_attr"><strong>Start date: </strong></td>
-        <td><%= @project.start_date %></td>
-      </tr>
-      <tr>
-        <td class="project_attr"><strong>Deadline: </strong></td>
-        <td><%= @project.dead_line %></td>
-      </tr>
-      <tr>
-        <td class="project_attr"><strong>status: </strong></td>
-        <td><%= @project.status %></td>
-      </tr>
-    </table>
+      <table>
+        <tr>
+          <td class="project_attr"><strong>Acc: </strong></td>
+          <td><%= @project.acc %></td>
+        </tr>
+        <tr>
+          <td class="project_attr"><strong>Start date: </strong></td>
+          <td><%= @project.start_date %></td>
+        </tr>
+        <tr>
+          <td class="project_attr"><strong>Deadline: </strong></td>
+          <td><%= @project.dead_line %></td>
+        </tr>
+        <tr>
+          <td class="project_attr"><strong>status: </strong></td>
+          <td><%= @project.status %></td>
+        </tr>
+      </table>
+    </div>
   </div>
-</div>
+<% else %>
+  <h1><%= @project.acc %></h1>
+  <div>
+    <div id="project_progress">
+      <div id="samples_received"
+          class="<%= @project.status_samples_received %>">
+        <span>Samples delivery</span>
+      </div>
+      <div class="arrow"> =====></div>
+      <div id="experiement_done"
+          class="<%= @project.status_experiments_done %>">
+        <span>Experiment</span>
+      </div>
+      <div class="arrow"> =====></div>
+      <div id="bioinformatics_done"
+          class="<%= @project.status_bioinformatics_done %>">
+        Bioinformatics
+      </div>
+      <div class="arrow"> =====></div>
+      <div id="report_finished"
+          class="<%= @project.status_report_finished %>">
+        Report
+      </div>
+    </div>
+    <br />
+    <div id="legends">
+      <div>
+        <div class="legend done"></div>  <span>Progress done</span>
+      </div>
+      <div>
+        <div class="legend not-done"></div>  <span>Progress processing</span>
+      </div>
+    </div>
+  </div>
+<% end %>
