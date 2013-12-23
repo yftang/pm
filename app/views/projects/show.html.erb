@@ -34,26 +34,40 @@
   </div>
 <% else %>
   <h1><%= @project.acc %></h1>
+  <div id="project_info">
+    <li style="list-style: none">
+      <ul>Customer: </ul>
+    </li>
+  </div>
+  <hr />
   <div>
     <div id="project_progress">
       <div id="samples_received"
           class="<%= @project.status_samples_received %>">
-        <span>Samples delivery</span>
+        <a href="javascript: void(0);" onclick="showProgress()">
+          Samples delivery
+        </a>
       </div>
       <div class="arrow"> =====></div>
       <div id="experiement_done"
           class="<%= @project.status_experiments_done %>">
-        <span>Experiment</span>
+        <a href="javascript: void(0);" onclick="showProgress()">
+          Experiment
+        </a>
       </div>
       <div class="arrow"> =====></div>
       <div id="bioinformatics_done"
           class="<%= @project.status_bioinformatics_done %>">
-        Bioinformatics
+        <a href="javascript: void(0);" onclick="showProgress()">
+          Bioinformatics
+        </a>
       </div>
       <div class="arrow"> =====></div>
       <div id="report_finished"
           class="<%= @project.status_report_finished %>">
-        Report
+        <a href="javascript: void(0);" onclick="showProgress()">
+          Report
+        </a>
       </div>
     </div>
     <br />
@@ -63,6 +77,27 @@
       </div>
       <div>
         <div class="legend not-done"></div>  <span>Progress processing</span>
+      </div>
+    </div>
+    <hr />
+    <div id="progress">
+      <div id="progress_delivery" style="display: none">
+        <% if @project.status_samples_received == 'done' %>
+          Samples delivery:
+          <li style="list-style: none">
+            <ul>Express number: </ul>
+            <ul>Received date: </ul>
+          </li>
+        <% end %>
+      </div>
+      <div id="progress_experiment" style="display: none">
+        Experiment:
+      </div>
+      <div id="progress_bioinformatics" style="display: none">
+        Bioinformatics:
+      </div>
+      <div id="progress_report" style="display: none">
+        Report:
       </div>
     </div>
   </div>

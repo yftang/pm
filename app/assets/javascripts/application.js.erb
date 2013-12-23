@@ -39,6 +39,28 @@ function showSearchResult() {
   });
 }
 
+function showProgress() {
+  event_object = event.target;
+  switch(event_object.text) {
+    case "Samples delivery":
+      $('div#progress div').hide();
+      $('div#progress_delivery').show(500);
+      break;
+    case "Experiment":
+      $('div#progress div').hide();
+      $('div#progress_experiment').show(500);
+      break;
+    case "Bioinformatics":
+      $('div#progress div').hide();
+      $('div#progress_bioinformatics').show(500);
+      break;
+    case "Report":
+      $('div#progress div').hide();
+      $('div#progress_report').show(500);
+      break;
+  }
+}
+
 function moveEvent(event, dayDelta){
   jQuery.ajax({
     data: 'id=' + event.id + '&title=' + event.title + '&day_delta=' + dayDelta + '&authenticity_token=' + '<%= @auth_token %>',
