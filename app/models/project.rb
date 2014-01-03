@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  before_save :default_values
+  before_validation :default_values
 
   validates :acc, presence: true, uniqueness: { case_sensitive: false }
   validates :start_date, presence: true
