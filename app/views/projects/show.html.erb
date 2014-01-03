@@ -83,21 +83,43 @@
     <div id="progress">
       <div id="progress_delivery" style="display: none">
         <% if @project.status_samples_received == 'done' %>
-          Samples delivery:
+          <% signing_user = User.find_by_email(@project.delivery_signed_by) %>
+          <h4>Samples delivery:</h4>
           <li style="list-style: none">
-            <ul>Express number: </ul>
-            <ul>Received date: </ul>
+            <ul>Signed by: <%= link_to signing_user.name, signing_user %></ul>
+            <ul>Express number: <%= @project.delivery_express_number %></ul>
+            <ul>Received date: <%= @project.delivery_received_date %></ul>
           </li>
         <% end %>
       </div>
       <div id="progress_experiment" style="display: none">
-        Experiment:
+        <% if @project.status_experiments_done == 'done' %>
+          <% operator = User.find_by_email(@project.experiment_operator) %>
+          <h4>Experiment:</h4>
+          <li style="list-style: none">
+            <ul>Operator: <%= link_to operator.name, operator %></ul>
+            <ul>Complete date: <%= @project.experiment_complete_date %></ul>
+          </li>
+        <% end %>
       </div>
       <div id="progress_bioinformatics" style="display: none">
-        Bioinformatics:
+        <% if @project.status_bioinformatics_done == 'done' %>
+          <% operator = User.find_by_email(@project.bioinformatics_operator) %>
+          <h4>Bioinformatics:</h4>
+          <li style="list-style: none">
+            <ul>Operator: <%= link_to operator.name, operator %></ul>
+            <ul>Complete date: <%= @project.bioinformatics_complete_date %></ul>
+          </li>
+        <% end %>
       </div>
       <div id="progress_report" style="display: none">
-        Report:
+        <% if @project.status_report_finished == 'done' %>
+          <% holder = User.find_by_email(@project.report_holder) %>
+          <h4>Report:</h4>
+          <li style="list-style: none">
+            <ul>Holder: <%= link_to holder.name, holder %></ul>
+          </li>
+        <% end %>
       </div>
     </div>
   </div>
