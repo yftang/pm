@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131219060332) do
+ActiveRecord::Schema.define(version: 20140103072833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,14 @@ ActiveRecord::Schema.define(version: 20131219060332) do
     t.string   "status_experiments_done"
     t.string   "status_bioinformatics_done"
     t.string   "status_report_finished"
+    t.string   "delivery_signed_by"
+    t.string   "delivery_express_number"
+    t.date     "delivery_received_date"
+    t.string   "experiment_operator"
+    t.date     "experiment_complete_date"
+    t.string   "bioinformatics_operator"
+    t.date     "bioinformatics_complete_date"
+    t.string   "report_holder"
   end
 
   add_index "projects", ["acc"], name: "index_projects_on_acc", using: :btree
