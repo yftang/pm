@@ -4,8 +4,8 @@
     <aside class="span4">
       <h3>Users responsible for</h3>
       <span>
-        <% for user in @users %>
-          <%= gravatar_for @user %>
+        <% @users.each do |user| %>
+          <%= gravatar_for user %>
         <% end %>
       </span>
     </aside>

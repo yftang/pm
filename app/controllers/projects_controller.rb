@@ -44,8 +44,8 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
 
-    if signed_in? and correct_user
-      @user = current_user
+    if signed_in?
+      # @user = current_user
       @users = @project.users
     end
   end
