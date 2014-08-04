@@ -39,8 +39,7 @@ function showSearchResult() {
   });
 }
 
-function showProgress() {
-  event_object = event.target;
+function showProgress(event_object) {
   switch(event_object.text) {
     case "Samples delivery":
       $('div#progress div').hide();
@@ -148,6 +147,10 @@ function showPeriodAndFrequency(value){
 }
 
 $(document).ready(function(){
+
+  $('div#project_progress a').click(function() {
+    showProgress(this);
+  });
 
   $('#create_event_dialog, #desc_dialog').on('submit', "#event_form", function(event) {
     var $spinner = $('.spinner');
