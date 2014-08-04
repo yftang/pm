@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20140103072833) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "projects", force: true do |t|
     t.string   "acc"
     t.date     "start_date"
@@ -40,7 +37,7 @@ ActiveRecord::Schema.define(version: 20140103072833) do
     t.string   "report_holder"
   end
 
-  add_index "projects", ["acc"], name: "index_projects_on_acc", using: :btree
+  add_index "projects", ["acc"], name: "index_projects_on_acc"
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -51,8 +48,8 @@ ActiveRecord::Schema.define(version: 20140103072833) do
     t.string   "remember_token"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
 
   create_table "workships", force: true do |t|
     t.integer  "user_id"
@@ -61,8 +58,8 @@ ActiveRecord::Schema.define(version: 20140103072833) do
     t.datetime "updated_at"
   end
 
-  add_index "workships", ["project_id"], name: "index_workships_on_project_id", using: :btree
-  add_index "workships", ["user_id", "project_id"], name: "index_workships_on_user_id_and_project_id", unique: true, using: :btree
-  add_index "workships", ["user_id"], name: "index_workships_on_user_id", using: :btree
+  add_index "workships", ["project_id"], name: "index_workships_on_project_id"
+  add_index "workships", ["user_id", "project_id"], name: "index_workships_on_user_id_and_project_id", unique: true
+  add_index "workships", ["user_id"], name: "index_workships_on_user_id"
 
 end
